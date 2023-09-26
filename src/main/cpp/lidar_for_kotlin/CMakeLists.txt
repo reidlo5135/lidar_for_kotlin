@@ -27,7 +27,6 @@ find_package(ament_cmake REQUIRED)
 find_package(rcl REQUIRED)
 find_package(rclc REQUIRED)
 find_package(rcutils REQUIRED)
-find_package(rclc_lifecycle REQUIRED)
 find_package(rmw REQUIRED)
 find_package(rmw_implementation_cmake REQUIRED)
 find_package(rosidl_generator_c REQUIRED)
@@ -39,10 +38,8 @@ find_package(JNI REQUIRED)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC")
 
 set(SOURCE_FILES
-    include/lidar_for_kotlin/net_wavem_lidar_lidar_for_kotlin.hpp
-    src/net_wavem_lidar_lidar_for_kotlin.cpp
-    include/lidar_for_kotlin/utils.hpp
-    src/utils.cpp
+    include/lidar_for_kotlin/net_wavem_lidar_lidar_for_kotlin.h
+    src/lidar_for_kotlin/net_wavem_lidar_lidar_for_kotlin.c
 )
 
 get_rmw_typesupport(typesupport_impls "rmw_implementation" LANGUAGE "c")
@@ -56,7 +53,6 @@ set(RCL_DEPENDENCIES
   rclc
   rcutils
   rmw
-  rclc_lifecycle
   rmw_implementation_cmake
   std_msgs
   sensor_msgs
