@@ -1,13 +1,12 @@
-#ifndef LIDAR_FOR_KOTLIN__HPP
-#define LIDAR_FOR_KOTLIN__HPP
+#ifndef LIDAR_FOR_KOTLIN__H
+#define LIDAR_FOR_KOTLIN__H
 
 #include <jni.h>
 
-#include <cassert>
-#include <cstdlib>
-#include <stdio.h>
+#include <assert.h>
 #include <stdlib.h>
-#include <string>
+#include <stdio.h>
+#include <string.h>
 
 #include <rmw/rmw.h>
 #include <rcl/rcl.h>
@@ -16,23 +15,16 @@
 #include <rcl/error_handling.h>
 #include <rcutils/logging_macros.h>
 #include <sensor_msgs/msg/laser_scan.h>
-#include "lidar_for_kotlin/utils.hpp"
 
 #ifndef _Included_JNI
 #define _Included_JNI
-#ifdef __cplusplus
-extern "C" {
-#endif
 
-JNIEXPORT void JNICALL Java_net_wavem_lidar_LiDARNode_nativeNodeRun(JNIEnv *, jclass);
+#define nullptr 0
 
-#ifdef __cplusplus
-}
-#endif
-
-static constexpr const char *RCL_NODE_NAME = "lidar_for_kotlin";
-static constexpr const int &RCL_EXECUTOR_SPIN_RATE_MS = 25;
-static constexpr const char *RCL_SCAN_TOPIC = "/scan";
+#define RCL_NODE_NAME "lidar_for_kotlin"
+#define RCL_EXECUTOR_SPIN_RATE_MS 25
+#define RCL_SCAN_TOPIC "/scan"
+#define RCL_START_FLAG 1
 
 #define RCCHECK(fn)                                                                                      \
     {                                                                                                    \
@@ -54,8 +46,19 @@ static constexpr const char *RCL_SCAN_TOPIC = "/scan";
         }                                                                                                  \
     }
 
+
 void rcl_scan_callback(const void * rcl_scan_ptr);
 
-#endif
+rcl_ret_t rc_kt;
+rcl_allocator_t rcl_allocator_kt;
+rclc_support_t *rclc_support_kt;
+rclc_executor_t rcl_executor;
 
+JNIEXPORT jlong JNICALL Java_net_wavem_lidar_LiDARNode_nativeRCLKotlinInit(JNIEnv *j_env, jclass j_class);
+JNIEXPORT jlong JNICALL Java_net_wavem_lidar_LiDARNode_nativeCreateNode(JNIEnv *j_env, jclass j_class, jlong j_rclkotlin_init_result);
+JNIEXPORT jlong JNICALL Java_net_wavem_lidar_LiDARNode_nativeSpin(JNIEnv *j_env, jclass j_class);
+
+JNIEXPORT void JNICALL Java_net_wavem_lidar_LiDARNode_nativeNodeRun(JNIEnv *j_env, jclass j_class);
+
+#endif
 #endif
