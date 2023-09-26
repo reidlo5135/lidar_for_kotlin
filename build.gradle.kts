@@ -2,7 +2,7 @@ plugins {
     kotlin("jvm") version "1.9.0"
 }
 
-group = "org.example"
+group = "net.wavem.lidar"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -18,5 +18,5 @@ tasks.test {
 }
 
 kotlin {
-    jvmToolchain(8)
+    jvmToolchain(17)
 }
