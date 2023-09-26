@@ -1,7 +1,5 @@
 .gradle
-build
-install
-log
+build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
@@ -42,3 +40,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+build
+install
+log
