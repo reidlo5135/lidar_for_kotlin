@@ -3,7 +3,7 @@ package net.wavem.lidar
 class LiDARNode {
     companion object {
         init {
-            System.loadLibrary("lidar_for_kotlin")
+            System.loadLibrary("liblidar_for_kotlin")
         }
     }
 

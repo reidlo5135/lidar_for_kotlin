@@ -64,22 +64,32 @@ set(RCL_DEPENDENCIES
   rosidl_runtime_c
 )
 
-add_library(rclkotlin_test SHARED ${SOURCE_FILES})
+add_library(lidar_for_kotlin
+  SHARED
+    ${SOURCE_FILES}
+)
 
-ament_target_dependencies(rclkotlin_test
+ament_target_dependencies(lidar_for_kotlin
   ${RCL_DEPENDENCIES}
 )
 
-target_link_libraries(rclkotlin_test
-    ${JNI_LIBRARIES}
+target_include_directories(lidar_for_kotlin
+    PUBLIC
+      ${JNI_LIBRARIES}
 )
 
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+ament_export_libraries(lidar_for_kotlin)
 
-set_target_properties(rclkotlin_test PROPERTIES OUTPUT_NAME rclkotlin_test)
-set(CMAKE_VERBOSE_MAKEFILE ON)
-set_target_properties(rclkotlin_test PROPERTIES
-    POSITION_INDEPENDENT_CODE TRUE
+install(TARGETS lidar_for_kotlin
+  LIBRARY DESTINATION "/usr/lib"
 )
 
-ament_package()
+# set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+
+# set_target_properties(lidar_for_kotlin PROPERTIES OUTPUT_NAME rclkotlin_test)
+# set(CMAKE_VERBOSE_MAKEFILE ON)
+# set_target_properties(lidar_for_kotlin PROPERTIES
+#     POSITION_INDEPENDENT_CODE TRUE
+# )
+
+# ament_package()
